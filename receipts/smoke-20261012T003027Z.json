@@ -1,0 +1,538 @@
+{
+  "schema": "cc4-testbed-smoke-receipt-v1",
+  "all_ok": true,
+  "utc": "2026-10-12T00:30:27Z",
+  "elapsed_seconds": 16.8,
+  "python": "3.10.0",
+  "implementation": "CPython",
+  "os": "Windows",
+  "machine": "AMD64",
+  "python_hash_seed": "0",
+  "packages": {
+    "numpy": "1.26.4",
+    "gym": "0.26.2",
+    "gymnasium": "0.28.1",
+    "networkx": "3.2.1",
+    "PyYAML": "6.0.1",
+    "prettytable": "3.9.0",
+    "pygame": "2.5.2"
+  },
+  "cyborg_version": "4.0",
+  "source_tree_sha256": "bddb200020f4577c4d7cb9dca9dbe2094864c25da33a6ac2a7758a8a8a693af0",
+  "config_path": "testbed/configs/smoke.json",
+  "config": {
+    "schema": "cc4-testbed-config-v1",
+    "seed": 42,
+    "settings": {
+      "steps": 40,
+      "mode": "ft",
+      "max_tool_calls": 4,
+      "max_idle_ticks": 10,
+      "max_retries": 0,
+      "budget_limit": 400,
+      "max_cost_usd": 5.0,
+      "framing": "neutral",
+      "deadline_scan": [
+        8,
+        30
+      ]
+    },
+    "client": {
+      "kind": "offline-stub",
+      "usage_cost_usd": 0.001
+    },
+    "blue": {
+      "kind": "switch",
+      "start": {
+        "id": "B0",
+        "model": "offline-stub-blue"
+      },
+      "other": {
+        "id": "B1",
+        "model": "offline-stub-blue"
+      },
+      "arm": "deadline",
+      "event_enabled": false,
+      "deadline_tick": 20
+    },
+    "red": {
+      "kind": "llm",
+      "id": "R0",
+      "model": "offline-stub-red"
+    }
+  },
+  "checks": [
+    {
+      "check": "network_guard",
+      "ok": true,
+      "seconds": 0.01,
+      "details": {
+        "blocked_primitives": [
+          "socket.socket",
+          "socket.create_connection",
+          "socket.getaddrinfo",
+          "urllib.request.urlopen",
+          "urllib.request.OpenerDirector.open"
+        ],
+        "files_scanned": 28,
+        "marker_hits": [],
+        "markers": [
+          "urllib.request",
+          "http.client",
+          "import requests",
+          "import httpx",
+          "import aiohttp",
+          "OPENROUTER",
+          "api_key"
+        ],
+        "real_client_shipped": false,
+        "real_client_importable": false
+      },
+      "error": null
+    },
+    {
+      "check": "environment_startup",
+      "ok": true,
+      "seconds": 0.78,
+      "details": {
+        "hosts": 86,
+        "blue_slots": [
+          "blue_agent_0",
+          "blue_agent_1",
+          "blue_agent_2",
+          "blue_agent_3",
+          "blue_agent_4"
+        ],
+        "red_slots": 6,
+        "scored_resources": [
+          "operational_zone_a_subnet_server_host_0",
+          "operational_zone_b_subnet_server_host_0"
+        ],
+        "mission_phase_per_tick": [
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "final_tick": 5,
+        "done_flag": true
+      },
+      "error": null
+    },
+    {
+      "check": "legal_action_interface",
+      "ok": true,
+      "seconds": 0.85,
+      "details": {
+        "listed_pairs_for_owner": 30,
+        "invalid_action_cost": 0.1,
+        "illegal_actions_counted": 1,
+        "ground_truth_marker_hits": [],
+        "ground_truth_markers": [
+          "environment_controller",
+          "compromise_of",
+          "get_true_state",
+          ".state."
+        ],
+        "stub_native_actions": [
+          "Restore"
+        ],
+        "stub_calls": 2
+      },
+      "error": null
+    },
+    {
+      "check": "holding_payoff",
+      "ok": true,
+      "seconds": 1.12,
+      "details": {
+        "t0_settlement": {
+          "x": {
+            "operational_zone_a_subnet_server_host_0": 0,
+            "operational_zone_b_subnet_server_host_0": 0
+          },
+          "v_red": 0.0,
+          "v_blue": 2.0
+        },
+        "after_red_root": {
+          "x": {
+            "operational_zone_a_subnet_server_host_0": 1,
+            "operational_zone_b_subnet_server_host_0": 0
+          },
+          "v_red": 1.0,
+          "v_blue": 1.0
+        },
+        "match": {
+          "T": 30,
+          "red_takes_control_after_tick": 10,
+          "red_resource_ticks": 20,
+          "U_B": 1.3333333333333333,
+          "U_R": 0.6666666666666666,
+          "held_value_blue": 40.0,
+          "held_value_red": 20.0,
+          "sum_identity_residual": 0.0
+        }
+      },
+      "error": null
+    },
+    {
+      "check": "completed_action_cost",
+      "ok": true,
+      "seconds": 1.76,
+      "details": {
+        "timeline": [
+          {
+            "tick": 1,
+            "in_progress": true,
+            "cost_B": 0.0
+          },
+          {
+            "tick": 2,
+            "in_progress": true,
+            "cost_B": 0.0
+          },
+          {
+            "tick": 3,
+            "in_progress": true,
+            "cost_B": 0.0
+          },
+          {
+            "tick": 4,
+            "in_progress": true,
+            "cost_B": 0.0
+          },
+          {
+            "tick": 5,
+            "in_progress": false,
+            "cost_B": 1.0
+          },
+          {
+            "tick": 6,
+            "in_progress": false,
+            "cost_B": 1.0
+          },
+          {
+            "tick": 7,
+            "in_progress": false,
+            "cost_B": 1.0
+          },
+          {
+            "tick": 8,
+            "in_progress": false,
+            "cost_B": 1.0
+          }
+        ],
+        "completed_tick": 5,
+        "ledger_rows_for_slot": 1,
+        "observer_detached_identical": true,
+        "in_flight_at_horizon": {
+          "in_progress": true,
+          "cost_B": 0.0,
+          "ledger_rows": 0
+        }
+      },
+      "error": null
+    },
+    {
+      "check": "switch_b0_to_b1",
+      "ok": true,
+      "seconds": 2.56,
+      "details": {
+        "deadline_tick": 8,
+        "switch_effective_tick": 8,
+        "scan": [
+          [
+            8,
+            "fork",
+            8,
+            3
+          ]
+        ],
+        "in_flight_slot": "blue_agent_0",
+        "in_flight_action": {
+          "action": "Restore",
+          "completed_tick": 10,
+          "next_submission_tick": 10,
+          "billed": 1.0,
+          "terminal_ledger_entries": 1,
+          "executed_rows_in_window": 1,
+          "slot_billing_growth_after_fork": 5.0
+        },
+        "calls": {
+          "B0": 2,
+          "B1": 6,
+          "red": 8
+        },
+        "wake_before_switch": {
+          "last_call_tick": 5,
+          "wake_spec": null,
+          "b1_last_call_tick": -1000000000
+        },
+        "at_switch": {
+          "tick": 8,
+          "b1_last_call_tick": 5,
+          "team_last_call_tick": 5,
+          "b1_calls": 0,
+          "b0_calls": 2
+        },
+        "budget_spent": 8,
+        "cost_spent_before_switch": 0.002,
+        "cost_cap_remaining_after_switch": 4.998,
+        "zero_switch_parity": {
+          "ticks": 20,
+          "sequences_equal": true,
+          "never_B1_calls": 0,
+          "never_B0_calls": 4,
+          "plain_B0_calls": 4
+        },
+        "payoff": {
+          "U_R": 0.0,
+          "U_B": 1.35,
+          "sum_v": 2.0,
+          "cost_R": 0.0,
+          "cost_B": 26.0,
+          "counts": {
+            "llm_calls": 0,
+            "decisions": 36,
+            "completed_actions": 36
+          }
+        }
+      },
+      "error": null
+    },
+    {
+      "check": "fork_save_restore",
+      "ok": true,
+      "seconds": 4.25,
+      "details": {
+        "fork_tick": 8,
+        "checkpoint_bytes": 759928,
+        "checkpoint_sha256": "17630a3470db5a90aa5d00857e1fb91c477634f60e75625cfbad050b9b5573d8",
+        "handles": [
+          "blue:B0",
+          "blue:B1",
+          "red"
+        ],
+        "live_vs_restored": {
+          "content": [],
+          "ordered": [
+            "__all__",
+            "game",
+            "red"
+          ]
+        },
+        "restored_vs_restored": {
+          "content": [],
+          "ordered": []
+        },
+        "cross_process_restore": {
+          "content": [],
+          "ordered": []
+        },
+        "in_progress_at_fork": [
+          "blue_agent_0",
+          "blue_agent_2",
+          "blue_agent_3"
+        ],
+        "isolation": {
+          "branch_B_fingerprint_unchanged": {
+            "content": [],
+            "ordered": []
+          },
+          "branch_B_client_calls": {
+            "blue:B0": 0,
+            "blue:B1": 0,
+            "red": 0
+          },
+          "branch_A_client_calls": {
+            "blue:B0": 0,
+            "blue:B1": 1,
+            "red": 0
+          }
+        },
+        "client_class_in_checkpoint_bytes": false,
+        "fingerprint_all": "2c2db81fe13e580cbdabfc5399f57ce8759e8c978fd8d182903aa6de48a3866b"
+      },
+      "error": null
+    },
+    {
+      "check": "fork_continuation",
+      "ok": true,
+      "seconds": 5.43,
+      "details": {
+        "fork_tick": 8,
+        "segment_ticks": 32,
+        "in_flight_action": "Restore",
+        "A_payoff": {
+          "U_R": 0.0,
+          "U_B": 1.325,
+          "sum_v": 2.0,
+          "cost_R": 0.0,
+          "cost_B": 27.0,
+          "counts": {
+            "llm_calls": 0,
+            "decisions": 37,
+            "completed_actions": 37
+          }
+        },
+        "B_payoff": {
+          "U_R": 0.0,
+          "U_B": 1.35,
+          "sum_v": 2.0,
+          "cost_R": 0.0,
+          "cost_B": 26.0,
+          "counts": {
+            "llm_calls": 0,
+            "decisions": 36,
+            "completed_actions": 36
+          }
+        },
+        "unforked_deadline_arm_payoff": {
+          "U_R": 0.0,
+          "U_B": 1.35,
+          "sum_v": 2.0,
+          "cost_R": 0.0,
+          "cost_B": 26.0,
+          "counts": {
+            "llm_calls": 0,
+            "decisions": 36,
+            "completed_actions": 36
+          }
+        },
+        "segments": {
+          "A1": {
+            "fork_tick": 8,
+            "ticks": 32,
+            "T": 40,
+            "trace_ticks_after_fork": 32,
+            "ledger_rows_after_fork": 32,
+            "blue": {
+              "value_segment_from_trace": 64.0,
+              "value_segment_from_wrapper": 64.0,
+              "ft_cost_segment_from_ledger": 25.0,
+              "ft_cost_segment_from_wrapper": 25.0,
+              "U_segment": 1.21875,
+              "U_full": 1.325,
+              "trace_vs_wrapper_residual": 0.0,
+              "ledger_vs_wrapper_residual": 0.0,
+              "identity_residual": 0.0
+            },
+            "red": {
+              "value_segment_from_trace": 0.0,
+              "value_segment_from_wrapper": 0.0,
+              "ft_cost_segment_from_ledger": 0.0,
+              "ft_cost_segment_from_wrapper": 0.0,
+              "U_segment": 0.0,
+              "U_full": 0.0,
+              "trace_vs_wrapper_residual": 0.0,
+              "ledger_vs_wrapper_residual": 0.0,
+              "identity_residual": 0.0
+            }
+          },
+          "A2": {
+            "fork_tick": 8,
+            "ticks": 32,
+            "T": 40,
+            "trace_ticks_after_fork": 32,
+            "ledger_rows_after_fork": 32,
+            "blue": {
+              "value_segment_from_trace": 64.0,
+              "value_segment_from_wrapper": 64.0,
+              "ft_cost_segment_from_ledger": 25.0,
+              "ft_cost_segment_from_wrapper": 25.0,
+              "U_segment": 1.21875,
+              "U_full": 1.325,
+              "trace_vs_wrapper_residual": 0.0,
+              "ledger_vs_wrapper_residual": 0.0,
+              "identity_residual": 0.0
+            },
+            "red": {
+              "value_segment_from_trace": 0.0,
+              "value_segment_from_wrapper": 0.0,
+              "ft_cost_segment_from_ledger": 0.0,
+              "ft_cost_segment_from_wrapper": 0.0,
+              "U_segment": 0.0,
+              "U_full": 0.0,
+              "trace_vs_wrapper_residual": 0.0,
+              "ledger_vs_wrapper_residual": 0.0,
+              "identity_residual": 0.0
+            }
+          },
+          "B": {
+            "fork_tick": 8,
+            "ticks": 32,
+            "T": 40,
+            "trace_ticks_after_fork": 32,
+            "ledger_rows_after_fork": 31,
+            "blue": {
+              "value_segment_from_trace": 64.0,
+              "value_segment_from_wrapper": 64.0,
+              "ft_cost_segment_from_ledger": 24.0,
+              "ft_cost_segment_from_wrapper": 24.0,
+              "U_segment": 1.25,
+              "U_full": 1.35,
+              "trace_vs_wrapper_residual": 0.0,
+              "ledger_vs_wrapper_residual": 0.0,
+              "identity_residual": 0.0
+            },
+            "red": {
+              "value_segment_from_trace": 0.0,
+              "value_segment_from_wrapper": 0.0,
+              "ft_cost_segment_from_ledger": 0.0,
+              "ft_cost_segment_from_wrapper": 0.0,
+              "U_segment": 0.0,
+              "U_full": 0.0,
+              "trace_vs_wrapper_residual": 0.0,
+              "ledger_vs_wrapper_residual": 0.0,
+              "identity_residual": 0.0
+            }
+          }
+        },
+        "in_flight_settled": {
+          "A1": {
+            "action": "Restore",
+            "completed_tick": 10,
+            "next_submission_tick": 10,
+            "billed": 1.0,
+            "terminal_ledger_entries": 1,
+            "executed_rows_in_window": 1,
+            "slot_billing_growth_after_fork": 7.0
+          },
+          "A2": {
+            "action": "Restore",
+            "completed_tick": 10,
+            "next_submission_tick": 10,
+            "billed": 1.0,
+            "terminal_ledger_entries": 1,
+            "executed_rows_in_window": 1,
+            "slot_billing_growth_after_fork": 7.0
+          },
+          "B": {
+            "action": "Restore",
+            "completed_tick": 10,
+            "next_submission_tick": 10,
+            "billed": 1.0,
+            "terminal_ledger_entries": 1,
+            "executed_rows_in_window": 1,
+            "slot_billing_growth_after_fork": 5.0
+          }
+        },
+        "A1_equals_A2": true,
+        "A_equals_unforked_B0_continuation": true,
+        "prefix_plus_B_equals_unforked_deadline_arm": true,
+        "B_switch_log": {
+          "switched": true,
+          "switch_effective_tick": 8,
+          "switch_reason": "deadline",
+          "budget_spent_final": 8,
+          "cost_cap_remaining_after_switch": 4.998
+        },
+        "B1_calls_in_A": 0,
+        "B0_calls_after_fork_in_B": 0,
+        "B1_calls_in_B": 6
+      },
+      "error": null
+    }
+  ]
+}

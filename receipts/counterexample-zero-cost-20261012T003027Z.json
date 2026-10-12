@@ -1,0 +1,250 @@
+{
+  "schema": "cc4-testbed-smoke-receipt-v1",
+  "all_ok": false,
+  "utc": "2026-10-12T00:30:34Z",
+  "elapsed_seconds": 5.6,
+  "python": "3.10.0",
+  "implementation": "CPython",
+  "os": "Windows",
+  "machine": "AMD64",
+  "python_hash_seed": "0",
+  "packages": {
+    "numpy": "1.26.4",
+    "gym": "0.26.2",
+    "gymnasium": "0.28.1",
+    "networkx": "3.2.1",
+    "PyYAML": "6.0.1",
+    "prettytable": "3.9.0",
+    "pygame": "2.5.2"
+  },
+  "cyborg_version": "4.0",
+  "source_tree_sha256": "bddb200020f4577c4d7cb9dca9dbe2094864c25da33a6ac2a7758a8a8a693af0",
+  "config_path": "testbed/configs/counterexample-zero-cost.json",
+  "config": {
+    "_comment": "Counter-example: a zero per-request cost means no cost accrues before the switch, so the inherited-cost-cap assertion of check `switch_b0_to_b1` must FAIL and smoke.py must exit 1.",
+    "schema": "cc4-testbed-config-v1",
+    "seed": 42,
+    "settings": {
+      "steps": 40,
+      "mode": "ft",
+      "max_tool_calls": 4,
+      "max_idle_ticks": 10,
+      "max_retries": 0,
+      "budget_limit": 400,
+      "max_cost_usd": 5.0,
+      "framing": "neutral",
+      "deadline_scan": [
+        8,
+        30
+      ]
+    },
+    "client": {
+      "kind": "offline-stub",
+      "usage_cost_usd": 0.0
+    },
+    "blue": {
+      "kind": "switch",
+      "start": {
+        "id": "B0",
+        "model": "offline-stub-blue"
+      },
+      "other": {
+        "id": "B1",
+        "model": "offline-stub-blue"
+      },
+      "arm": "deadline",
+      "event_enabled": false,
+      "deadline_tick": 20
+    },
+    "red": {
+      "kind": "llm",
+      "id": "R0",
+      "model": "offline-stub-red"
+    }
+  },
+  "checks": [
+    {
+      "check": "network_guard",
+      "ok": true,
+      "seconds": 0.01,
+      "details": {
+        "blocked_primitives": [
+          "socket.socket",
+          "socket.create_connection",
+          "socket.getaddrinfo",
+          "urllib.request.urlopen",
+          "urllib.request.OpenerDirector.open"
+        ],
+        "files_scanned": 28,
+        "marker_hits": [],
+        "markers": [
+          "urllib.request",
+          "http.client",
+          "import requests",
+          "import httpx",
+          "import aiohttp",
+          "OPENROUTER",
+          "api_key"
+        ],
+        "real_client_shipped": false,
+        "real_client_importable": false
+      },
+      "error": null
+    },
+    {
+      "check": "environment_startup",
+      "ok": true,
+      "seconds": 0.8,
+      "details": {
+        "hosts": 86,
+        "blue_slots": [
+          "blue_agent_0",
+          "blue_agent_1",
+          "blue_agent_2",
+          "blue_agent_3",
+          "blue_agent_4"
+        ],
+        "red_slots": 6,
+        "scored_resources": [
+          "operational_zone_a_subnet_server_host_0",
+          "operational_zone_b_subnet_server_host_0"
+        ],
+        "mission_phase_per_tick": [
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "final_tick": 5,
+        "done_flag": true
+      },
+      "error": null
+    },
+    {
+      "check": "legal_action_interface",
+      "ok": true,
+      "seconds": 0.86,
+      "details": {
+        "listed_pairs_for_owner": 30,
+        "invalid_action_cost": 0.1,
+        "illegal_actions_counted": 1,
+        "ground_truth_marker_hits": [],
+        "ground_truth_markers": [
+          "environment_controller",
+          "compromise_of",
+          "get_true_state",
+          ".state."
+        ],
+        "stub_native_actions": [
+          "Restore"
+        ],
+        "stub_calls": 2
+      },
+      "error": null
+    },
+    {
+      "check": "holding_payoff",
+      "ok": true,
+      "seconds": 1.09,
+      "details": {
+        "t0_settlement": {
+          "x": {
+            "operational_zone_a_subnet_server_host_0": 0,
+            "operational_zone_b_subnet_server_host_0": 0
+          },
+          "v_red": 0.0,
+          "v_blue": 2.0
+        },
+        "after_red_root": {
+          "x": {
+            "operational_zone_a_subnet_server_host_0": 1,
+            "operational_zone_b_subnet_server_host_0": 0
+          },
+          "v_red": 1.0,
+          "v_blue": 1.0
+        },
+        "match": {
+          "T": 30,
+          "red_takes_control_after_tick": 10,
+          "red_resource_ticks": 20,
+          "U_B": 1.3333333333333333,
+          "U_R": 0.6666666666666666,
+          "held_value_blue": 40.0,
+          "held_value_red": 20.0,
+          "sum_identity_residual": 0.0
+        }
+      },
+      "error": null
+    },
+    {
+      "check": "completed_action_cost",
+      "ok": true,
+      "seconds": 1.72,
+      "details": {
+        "timeline": [
+          {
+            "tick": 1,
+            "in_progress": true,
+            "cost_B": 0.0
+          },
+          {
+            "tick": 2,
+            "in_progress": true,
+            "cost_B": 0.0
+          },
+          {
+            "tick": 3,
+            "in_progress": true,
+            "cost_B": 0.0
+          },
+          {
+            "tick": 4,
+            "in_progress": true,
+            "cost_B": 0.0
+          },
+          {
+            "tick": 5,
+            "in_progress": false,
+            "cost_B": 1.0
+          },
+          {
+            "tick": 6,
+            "in_progress": false,
+            "cost_B": 1.0
+          },
+          {
+            "tick": 7,
+            "in_progress": false,
+            "cost_B": 1.0
+          },
+          {
+            "tick": 8,
+            "in_progress": false,
+            "cost_B": 1.0
+          }
+        ],
+        "completed_tick": 5,
+        "ledger_rows_for_slot": 1,
+        "observer_detached_identical": true,
+        "in_flight_at_horizon": {
+          "in_progress": true,
+          "cost_B": 0.0,
+          "ledger_rows": 0
+        }
+      },
+      "error": null
+    },
+    {
+      "check": "switch_b0_to_b1",
+      "ok": false,
+      "seconds": 1.15,
+      "details": null,
+      "error": {
+        "type": "Fail",
+        "message": "no cost accrued before the switch (usage_cost_usd must be > 0)",
+        "traceback": "Traceback (most recent call last):\n  File \"<repo>\\smoke.py\", line 667, in run\n    details = fn(ctx)\n  File \"<repo>\\smoke.py\", line 440, in check_switch_b0_to_b1\n    need(sl.get(\"cost_spent_before_switch\", 0) > 0, \"no cost accrued before the switch (usage_cost_usd must be > 0)\")\n  File \"<repo>\\smoke.py\", line 50, in need\n    raise Fail(msg)\nFail: no cost accrued before the switch (usage_cost_usd must be > 0)\n"
+      }
+    }
+  ]
+}

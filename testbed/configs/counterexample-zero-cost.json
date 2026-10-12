@@ -1,0 +1,26 @@
+{
+  "_comment": "Counter-example: a zero per-request cost means no cost accrues before the switch, so the inherited-cost-cap assertion of check `switch_b0_to_b1` must FAIL and smoke.py must exit 1.",
+  "schema": "cc4-testbed-config-v1",
+  "seed": 42,
+  "settings": {
+    "steps": 40,
+    "mode": "ft",
+    "max_tool_calls": 4,
+    "max_idle_ticks": 10,
+    "max_retries": 0,
+    "budget_limit": 400,
+    "max_cost_usd": 5.0,
+    "framing": "neutral",
+    "deadline_scan": [8, 30]
+  },
+  "client": {"kind": "offline-stub", "usage_cost_usd": 0.0},
+  "blue": {
+    "kind": "switch",
+    "start": {"id": "B0", "model": "offline-stub-blue"},
+    "other": {"id": "B1", "model": "offline-stub-blue"},
+    "arm": "deadline",
+    "event_enabled": false,
+    "deadline_tick": 20
+  },
+  "red": {"kind": "llm", "id": "R0", "model": "offline-stub-red"}
+}

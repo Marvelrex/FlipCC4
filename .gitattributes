@@ -1,0 +1,3 @@
+# Store every file byte-for-byte: the vendored upstream simulator uses CRLF line endings and the
+# source-tree hash in the smoke receipt is computed over the shipped bytes (CRLF-normalised).
+* -text

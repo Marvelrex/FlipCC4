@@ -1,0 +1,9 @@
+# Runtime of the vendored CybORG 4.0 simulator and the testbed. Pinned to the versions the
+# smoke was accepted with (CPython 3.10). Nothing here is a model SDK or an HTTP client.
+numpy==1.26.4
+gym==0.26.2
+gymnasium==0.28.1
+networkx==3.2.1
+PyYAML==6.0.1
+prettytable==3.9.0
+pygame==2.5.2
